@@ -8,6 +8,7 @@
             "args": [
                 "-g",
                 "${fileDirname}\\main.cpp",
+                "${fileDirname}\\student.cpp",
                 "-o",
                 "${fileDirname}\\main.exe"
             ],
