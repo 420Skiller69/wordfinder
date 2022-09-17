@@ -1,12 +1,13 @@
 #include <vector>
 #include <iterator>
+#include <cmath>
 
 
-struct student
+struct Student
 {
 	char word[8];
 	double fitness;
 
-    void getFitness(std::vector<char> keyword);
+    double getFitness(std::vector<char> keyword);
 };
 
