@@ -18,16 +18,12 @@ int main(int argc, char* args[])
 	srand(time(NULL));
 
 
-	vector<struct Student> studs(popSize);
-	vector<struct Student> studs_mirror(popSize);
-
-	for(auto &s: studs)
-		for(auto &letter: s.word)
-			letter = 'a' + rand()%('z' - 'a' + 1);
+	vector<class Student> studs(popSize);
+	vector<class Student> studs_mirror(popSize);
 
 	
 
-	for(int generation = 0; generation < 1000; generation++)
+	for(int generation = 0; generation < 10; generation++)
 	{
 		double totalFitness = 0; // calc fitness / totalfitness ------------------------------------------------------
 		for(auto &s: studs)
@@ -59,34 +55,15 @@ int main(int argc, char* args[])
 				parent2--;
 			}
 
-			int parentBias = rand()%keyword.size();
-			for(vector<char>::size_type i = 0; i < keyword.size(); i++)
-			{
-				if( i <= parentBias) child.word[i] = (*parent1).word[i];
-				else				 child.word[i] = (*parent2).word[i];
-			}
-			if(rand()/(double)RAND_MAX < 0.2)
-			{
-				child.word[rand()%keyword.size()] = 'a' + rand()%('z' - 'a' + 1);
-			}
+			interpolate(*parent1, *parent2, child, rand()/(double)RAND_MAX);
+			child.mutate(0.2, 1);
 		}
-		// cout << generation << "--------------------------" << endl;
-		// for(auto s: studs)
-		// {
-		// 	for(auto letter: s.word)
-		// 		cout << letter ;
-		// 	cout << " => " << s.fitness << endl;
-		// }
+		cout << generation << "--------------------------" << endl;
+		for(auto s: studs) 	s.display();
+	
 		swap(studs, studs_mirror);
 	}
 
-
-	for(auto s: studs)
-	{
-		for(auto letter: s.word)
-			cout << letter ;
-		cout << " => " << s.getFitness(keyword) << endl;
-	}
 
 
 	return 0;
