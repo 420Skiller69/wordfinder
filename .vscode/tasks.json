@@ -9,6 +9,7 @@
                 "-g",
                 "${fileDirname}\\main.cpp",
                 "${fileDirname}\\Student.cpp",
+                "${fileDirname}\\Classroom.cpp",
                 "-o",
                 "${fileDirname}\\main.exe"
             ],
